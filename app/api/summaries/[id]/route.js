@@ -1,21 +1,9 @@
 import { NextResponse } from 'next/server'
-
-// Import the summaries array from the main route
-// In a real app, this would be a database
-let summaries = []
-
-// This is a workaround since we can't easily share state between route files
-// In production, use a proper database
-try {
-  // This won't work in production, but for demo purposes
-  summaries = require('../route.js').summaries || []
-} catch (e) {
-  summaries = []
-}
+import { getSummaryById, updateSummary, deleteSummary } from '../../../../lib/data'
 
 export async function GET(request, { params }) {
   const { id } = params
-  const summary = summaries.find(s => s.id === parseInt(id))
+  const summary = getSummaryById(id)
 
   if (!summary) {
     return NextResponse.json({ error: 'Summary not found' }, { status: 404 })
@@ -30,25 +18,23 @@ export async function PUT(request, { params }) {
     const body = await request.json()
     const { title, original_text, summary: newSummary } = body
 
-    const summaryIndex = summaries.findIndex(s => s.id === parseInt(id))
-    if (summaryIndex === -1) {
-      return NextResponse.json({ error: 'Summary not found' }, { status: 404 })
-    }
-
     const wordCount = original_text.trim().split(/\s+/).filter(w => w.length > 0).length
     const category = detectCategory(original_text)
 
-    summaries[summaryIndex] = {
-      ...summaries[summaryIndex],
+    const updateData = {
       title,
       original_text,
       summary: newSummary,
       category,
-      word_count: wordCount,
-      updated_at: new Date().toISOString()
+      word_count: wordCount
     }
 
-    return NextResponse.json(summaries[summaryIndex])
+    const updatedSummary = updateSummary(id, updateData)
+    if (!updatedSummary) {
+      return NextResponse.json({ error: 'Summary not found' }, { status: 404 })
+    }
+
+    return NextResponse.json(updatedSummary)
   } catch (error) {
     console.error('Error updating summary:', error)
     return NextResponse.json({ error: 'Failed to update summary' }, { status: 500 })
@@ -57,13 +43,12 @@ export async function PUT(request, { params }) {
 
 export async function DELETE(request, { params }) {
   const { id } = params
-  const summaryIndex = summaries.findIndex(s => s.id === parseInt(id))
+  const success = deleteSummary(id)
 
-  if (summaryIndex === -1) {
+  if (!success) {
     return NextResponse.json({ error: 'Summary not found' }, { status: 404 })
   }
 
-  const deletedSummary = summaries.splice(summaryIndex, 1)[0]
   return NextResponse.json({ message: 'Summary deleted successfully' })
 }
 

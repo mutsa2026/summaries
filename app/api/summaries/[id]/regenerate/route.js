@@ -1,33 +1,23 @@
 import { NextResponse } from 'next/server'
-
-// Import the summaries array from the main route
-let summaries = []
-
-try {
-  summaries = require('../../route.js').summaries || []
-} catch (e) {
-  summaries = []
-}
+import { getSummaryById, regenerateSummary } from '../../../../lib/data'
 
 export async function POST(request, { params }) {
   try {
     const { id } = params
-    const summaryIndex = summaries.findIndex(s => s.id === parseInt(id))
+    const existingSummary = getSummaryById(id)
 
-    if (summaryIndex === -1) {
+    if (!existingSummary) {
       return NextResponse.json({ error: 'Summary not found' }, { status: 404 })
     }
 
-    const summary = summaries[summaryIndex]
-    const newSummary = await generateSummary(summary.original_text)
+    const newSummaryText = await generateSummary(existingSummary.original_text)
+    const updatedSummary = regenerateSummary(id, newSummaryText)
 
-    summaries[summaryIndex] = {
-      ...summary,
-      summary: newSummary,
-      updated_at: new Date().toISOString()
+    if (!updatedSummary) {
+      return NextResponse.json({ error: 'Failed to regenerate summary' }, { status: 500 })
     }
 
-    return NextResponse.json(summaries[summaryIndex])
+    return NextResponse.json(updatedSummary)
   } catch (error) {
     console.error('Error regenerating summary:', error)
     return NextResponse.json({ error: 'Failed to regenerate summary' }, { status: 500 })

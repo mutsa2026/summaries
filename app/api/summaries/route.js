@@ -1,21 +1,8 @@
 import { NextResponse } from 'next/server'
-
-// In-memory storage for demo purposes
-// In production, you'd use a database
-let summaries = [
-  {
-    id: 1,
-    title: 'Sample Summary',
-    original_text: 'This is a sample text for demonstration purposes. It contains enough content to generate a meaningful summary.',
-    summary: 'This sample text demonstrates the summarization functionality.',
-    category: 'General',
-    word_count: 15,
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString()
-  }
-]
+import { getSummaries, createSummary } from '../../../lib/data'
 
 export async function GET() {
+  const summaries = getSummaries()
   return NextResponse.json(summaries)
 }
 
@@ -29,18 +16,15 @@ export async function POST(request) {
     const wordCount = original_text.trim().split(/\s+/).filter(w => w.length > 0).length
     const detectedCategory = category || detectCategory(original_text)
 
-    const newSummary = {
-      id: summaries.length + 1,
+    const summaryData = {
       title,
       original_text,
       summary,
       category: detectedCategory,
-      word_count: wordCount,
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString()
+      word_count: wordCount
     }
 
-    summaries.push(newSummary)
+    const newSummary = createSummary(summaryData)
     return NextResponse.json(newSummary, { status: 201 })
   } catch (error) {
     console.error('Error creating summary:', error)
