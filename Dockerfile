@@ -8,11 +8,10 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
-    zip \
-    libpq-dev
+    zip
 
-# Install PostgreSQL drivers
-RUN docker-php-ext-install pdo pdo_pgsql
+# Install SQLite drivers
+RUN docker-php-ext-install pdo pdo_sqlite
 
 # Install other Laravel extensions
 RUN docker-php-ext-install mbstring zip exif pcntl
