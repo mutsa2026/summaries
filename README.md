@@ -1,59 +1,80 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# AI Summary Pro
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="https://img.shields.io/badge/Next.js-14.0-black" alt="Next.js">
+  <img src="https://img.shields.io/badge/React-18.0-blue" alt="React">
+  <img src="https://img.shields.io/badge/Bootstrap-5.3-purple" alt="Bootstrap">
+  <img src="https://img.shields.io/badge/Vercel-Deployed-green" alt="Vercel">
 </p>
 
-## About Laravel
+## About
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+AI Summary Pro is a modern web application built with Next.js that provides AI-powered text summarization capabilities. Transform long texts into concise, intelligent summaries with advanced features like category detection, word counting, and customizable summary lengths.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **AI-Powered Summarization**: Generate intelligent summaries using advanced AI algorithms
+- **Category Detection**: Automatically detect and assign categories to your summaries
+- **Real-time Statistics**: Track word counts, reading times, and processing metrics
+- **Responsive Design**: Beautiful, mobile-friendly interface built with Bootstrap
+- **CRUD Operations**: Full create, read, update, and delete functionality
+- **Search & Filter**: Advanced filtering and sorting options
+- **Regenerate Summaries**: Re-run AI summarization on existing content
 
-## Learning Laravel
+## Tech Stack
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+- **Framework**: Next.js 14 with App Router
+- **Frontend**: React 18, Bootstrap 5
+- **Styling**: Custom CSS with Font Awesome icons
+- **Deployment**: Optimized for Vercel hosting
+- **API**: Next.js API Routes for backend functionality
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Getting Started
 
-## Laravel Sponsors
+### Prerequisites
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- Node.js 18+
+- npm or yarn
 
-### Premium Partners
+### Installation
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## Contributing
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## Code of Conduct
+### Deployment
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+This app is optimized for deployment on Vercel:
 
-## Security Vulnerabilities
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Deploy automatically
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Usage
+
+1. **Create Summary**: Click "Create New Summary" to add new content
+2. **View Summaries**: Browse your collection with search and filter options
+3. **Edit Content**: Modify existing summaries and regenerate AI content
+4. **Track Statistics**: Monitor your summarization metrics and progress
+
+## API Routes
+
+- `GET /api/summaries` - List all summaries
+- `POST /api/summaries` - Create new summary
+- `GET /api/summaries/[id]` - Get specific summary
+- `PUT /api/summaries/[id]` - Update summary
+- `DELETE /api/summaries/[id]` - Delete summary
+- `POST /api/summaries/[id]/regenerate` - Regenerate AI summary
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
