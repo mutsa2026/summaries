@@ -22,8 +22,14 @@ COPY . /var/www/html
 # Set working directory
 WORKDIR /var/www/html
 
+# Copy env file
+COPY .env.example .env
+
 # Install composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 RUN composer install --no-dev --optimize-autoloader
+
+# Generate app key
+RUN php artisan key:generate
 
 CMD php artisan serve --host=0.0.0.0 --port=$PORT
