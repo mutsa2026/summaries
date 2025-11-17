@@ -23,8 +23,8 @@ COPY . /var/www/html
 # Set working directory
 WORKDIR /var/www/html
 
-# Copy env file
-COPY .env.example .env
+# Create env file
+RUN touch .env
 
 # Install composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
