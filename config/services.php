@@ -33,6 +33,18 @@ return [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
+    'openrouter' => [
+        'key' => env('OPENROUTER_API_KEY'),
+    ],
+
+    'huggingface' => [
+        'key' => env('HUGGINGFACE_API_KEY'),
+    ],
+
+    'ollama' => [
+        'enabled' => env('OLLAMA_ENABLED', false),
+        'base_url' => env('OLLAMA_BASE_URL', 'http://localhost:11434'),
+    ],
     ],
 
 ];
