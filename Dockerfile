@@ -8,10 +8,11 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
-    zip
+    zip \
+    libpq-dev
 
-# Install MySQL drivers
-RUN docker-php-ext-install pdo pdo_mysql
+# Install PostgreSQL drivers
+RUN docker-php-ext-install pdo pdo_pgsql
 
 # Install other Laravel extensions
 RUN docker-php-ext-install mbstring zip exif pcntl
